@@ -11,7 +11,8 @@ public class App {
         System.out.println("Press 1 for Bubble Sort:");
         System.out.println("Press 2 for Selection Sort:");
         System.out.println("Press 3 for Hybrid Sort:");
-        System.out.println("Press 4 for Merge Sort:");
+        System.out.println("Press 4 for Quick Sort:");
+        System.out.println("Press 5 for Merge Sort:");
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
         // int[] input = { 9, 8, 7, 6 };
@@ -36,6 +37,9 @@ public class App {
                 StartPrograme();
                 break;
             case "4":
+                // Quick Sort
+                break;
+            case "5":
                 MergeSort mergeSort = new MergeSort();
                 mergeSort.mergeSort(input, input.length);
                 System.out.println("Merge Sort: " + Arrays.toString(input));
