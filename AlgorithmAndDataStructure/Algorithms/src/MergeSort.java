@@ -1,12 +1,14 @@
-/*
-Merge Sort:
-Divide: In this step, we divide the input array into 2 halves, the pivot being the midpoint of the array.
-This step is carried out recursively for all the half arrays until there are no more half arrays to divide.
-
-Conquer: In this step, we sort and merge the divided arrays from bottom to top and get the sorted array.
-*/
-
 public class MergeSort {
+    /*
+     * Merge Sort:
+     * Divide: In this step, we divide the input array into 2 halves, the pivot
+     * being the midpoint of the array.
+     * This step is carried out recursively for all the half arrays until there are
+     * no more half arrays to divide.
+     * 
+     * Conquer: In this step, we sort and merge the divided arrays from bottom to
+     * top and get the sorted array.
+     */
     public void mergeSort(int[] array, int n) {
         if (n < 2) {
             return;
