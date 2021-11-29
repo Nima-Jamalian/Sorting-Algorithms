@@ -3,5 +3,5 @@
 Sorting Algorithms Java Implementation
 - Bubble Sort
 - Selection Sort
-- Hybrid Sort (Bubble + Selection Sort)
-- Merge Sort
+- Counting Sort
+
