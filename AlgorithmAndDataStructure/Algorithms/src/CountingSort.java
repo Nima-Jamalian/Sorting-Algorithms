@@ -7,6 +7,7 @@ public class CountingSort {
             return new int[0];
         } else {
             System.out.println(Arrays.toString(array));
+
             int max = Arrays.stream(array).max().getAsInt();
             int min = Arrays.stream(array).min().getAsInt();
             System.out.println("min = " + min);

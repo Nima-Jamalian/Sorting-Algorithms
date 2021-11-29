@@ -9,14 +9,10 @@ void PrintVectorElement(vector<int> array)
     {
         cout << i << " ";
     }
-    cout << " " << endl;
 }
 
 vector<int> BubbleSort(vector<int> array)
 {
-    cout << "Unsorted Array = ";
-    PrintVectorElement(array);
-
     bool toSwap = true;
     int temp;
     while (toSwap)
@@ -30,21 +26,19 @@ vector<int> BubbleSort(vector<int> array)
                 array[i] = array[i + 1];
                 array[i + 1] = temp;
                 toSwap = true;
+                //PrintVectorElement(array);
             }
         }
     }
-
-    cout << "Sorted Array = ";
     return array;
 }
 
 vector<int> SelectionSort(vector<int> array)
 {
-    cout << "Unsorted Array = ";
-    PrintVectorElement(array);
-
     for (int i = 0; i < array.size() - 1; i++)
     {
+        //PrintVectorElement(array);
+
         int min_idx = i;
         for (int j = i + 1; j < array.size(); j++)
         {
@@ -57,17 +51,11 @@ vector<int> SelectionSort(vector<int> array)
         array[min_idx] = array[i];
         array[i] = temp;
     }
-
-    cout << "Sorted Array = ";
     return array;
 }
 
 vector<int> CountingSort(vector<int> array)
 {
-
-    cout << "Unsorted Array = ";
-    PrintVectorElement(array);
-
     int max = *max_element(array.begin(), array.end());
     int min = *min_element(array.begin(), array.end());
     // cout << "Max = " << max << endl;
@@ -92,9 +80,28 @@ vector<int> CountingSort(vector<int> array)
             array_idx += 1;
         }
     }
-
-    cout << "Sorted Array = ";
     return array;
+}
+
+void SelectSortingOption(string SortName, vector<int> input)
+{
+    cout << " " << endl;
+    cout << SortName << " Sort: " << endl;
+    cout << "Input Array = ";
+    PrintVectorElement(input);
+    cout << " " << endl;
+    cout << "Sorted Array = ";
+    if (SortName == "Bubble")
+    {
+        PrintVectorElement(BubbleSort(input));
+    } else if (SortName == "Selection"){
+        PrintVectorElement(SelectionSort(input));
+    } else if (SortName == "Counting"){
+        PrintVectorElement(CountingSort(input));
+    } else {
+           cout << "Sort Algorithm for " << SortName << " has not been defined";
+    }
+    cout << " " << endl;
 }
 
 void StartSortingProgrammer()
@@ -106,10 +113,10 @@ void StartSortingProgrammer()
     // Input with constant numbers
     // vector<int> input = { 2, 2, 2, 2, 2, 2, 2 };
     // Input with positive and negative numbers
-    vector<int> input = { 10, -6, -8, -5, -7, 3, 4 };
-    int userInput;
+    vector<int> input = {10, -6, -8, -5, -7, 3, 4};
+    int userInput = 0;
     cout << " " << endl;
-    cout << "Start Programme: " << endl;
+    cout << "Start Sorting Programme: " << endl;
     cout << "Press 1 for Bubble Sort: " << endl;
     cout << "Press 2 for Selection Sort:" << endl;
     cout << "Press 3 for Counting Sort:" << endl;
@@ -117,19 +124,20 @@ void StartSortingProgrammer()
     switch (userInput)
     {
     case 1:
-        PrintVectorElement(BubbleSort(input));
+        SelectSortingOption("Bubble", input);
         StartSortingProgrammer();
         break;
     case 2:
-        PrintVectorElement(SelectionSort(input));
+        SelectSortingOption("Selection", input);
         StartSortingProgrammer();
         break;
     case 3:
-        PrintVectorElement(CountingSort(input));
+        SelectSortingOption("Counting", input);
         StartSortingProgrammer();
         break;
     default:
         cout << " Wrong Input! Try again." << endl;
+        StartSortingProgrammer();
         break;
     }
 }
