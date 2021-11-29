@@ -16,8 +16,14 @@ public class App {
         System.out.println("Press 6 for Counting Sort:");
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
-        // int[] input = { 9, 8, 7, 6 };
-        int[] input = { 10, 6, 8, 5, 7, 3, 4 };
+        // Input Empty
+        // int[] input = {};
+        // Input Positive Number
+        // int[] input = { 10, 6, 8, 5, 7, 3, 4 };
+        // Input with constant numbers
+        // int[] input = { 2, 2, 2, 2, 2, 2, 2 };
+        // Input with positive and negative numbers
+        int[] input = { 10, -6, -8, -5, -7, 3, 4 };
         switch (userInput) {
             case "1":
                 BubbleSort bubbleSort = new BubbleSort();
