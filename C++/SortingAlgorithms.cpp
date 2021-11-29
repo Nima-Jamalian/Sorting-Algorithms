@@ -94,12 +94,18 @@ void SelectSortingOption(string SortName, vector<int> input)
     if (SortName == "Bubble")
     {
         PrintVectorElement(BubbleSort(input));
-    } else if (SortName == "Selection"){
+    }
+    else if (SortName == "Selection")
+    {
         PrintVectorElement(SelectionSort(input));
-    } else if (SortName == "Counting"){
+    }
+    else if (SortName == "Counting")
+    {
         PrintVectorElement(CountingSort(input));
-    } else {
-           cout << "Sort Algorithm for " << SortName << " has not been defined";
+    }
+    else
+    {
+        cout << "Sort Algorithm for " << SortName << " has not been defined";
     }
     cout << " " << endl;
 }
@@ -121,24 +127,39 @@ void StartSortingProgrammer()
     cout << "Press 2 for Selection Sort:" << endl;
     cout << "Press 3 for Counting Sort:" << endl;
     cin >> userInput;
-    switch (userInput)
+    bool isInputValid = false;
+    if (cin.good())//Validate to see user input is an integer
     {
-    case 1:
-        SelectSortingOption("Bubble", input);
+        isInputValid = true;
+        switch (userInput)
+        {
+        case 1:
+            SelectSortingOption("Bubble", input);
+            StartSortingProgrammer();
+            break;
+        case 2:
+            SelectSortingOption("Selection", input);
+            StartSortingProgrammer();
+            break;
+        case 3:
+            SelectSortingOption("Counting", input);
+            StartSortingProgrammer();
+            break;
+        default:
+            cout << "Wrong Number! Try again." << endl;
+            StartSortingProgrammer();
+            break;
+        }
+    }
+    else
+    {
+        //User Input is not an interger
+        //Something went wrong, we reset the buffer's state to good
+        cin.clear();
+        //and empty it
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        cout << "Wrong Input! Try again." << endl;
         StartSortingProgrammer();
-        break;
-    case 2:
-        SelectSortingOption("Selection", input);
-        StartSortingProgrammer();
-        break;
-    case 3:
-        SelectSortingOption("Counting", input);
-        StartSortingProgrammer();
-        break;
-    default:
-        cout << " Wrong Input! Try again." << endl;
-        StartSortingProgrammer();
-        break;
     }
 }
 
