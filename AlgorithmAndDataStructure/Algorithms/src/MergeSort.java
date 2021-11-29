@@ -9,6 +9,21 @@ public class MergeSort {
      * Conquer: In this step, we sort and merge the divided arrays from bottom to
      * top and get the sorted array.
      */
+    /*
+     * Time Complexity: T(n) = 2T(n/2) + O(n)
+     * 2T(n/2) corresponds to the time required to sort the sub-arrays and O(n) time
+     * to merge the entire array.
+     * the time complexity will come to O(nLogn).
+     * 
+     * Big O means your algorithm will execute in no more steps than in given
+     * expression(n^2)
+     * 
+     * Big Omega means your algorithm will execute in no fewer steps than in the
+     * given expression(n^2)
+     * 
+     * When both condition are true for the same expression, you can use the big
+     * theta notation....
+     */
     public void mergeSort(int[] array, int n) {
         if (n < 2) {
             return;

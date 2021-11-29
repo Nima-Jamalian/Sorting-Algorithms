@@ -13,6 +13,7 @@ public class App {
         System.out.println("Press 3 for Hybrid Sort:");
         System.out.println("Press 4 for Quick Sort:");
         System.out.println("Press 5 for Merge Sort:");
+        System.out.println("Press 6 for Counting Sort:");
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
         // int[] input = { 9, 8, 7, 6 };
@@ -43,6 +44,10 @@ public class App {
                 MergeSort mergeSort = new MergeSort();
                 mergeSort.mergeSort(input, input.length);
                 System.out.println("Merge Sort: " + Arrays.toString(input));
+                break;
+            case "6":
+                CountingSort countingSort = new CountingSort();
+                System.out.println("Counting Sort: " + Arrays.toString(countingSort.Start(input)));
                 break;
             default:
         }
