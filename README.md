@@ -1,6 +1,6 @@
 # Sorting-Algorithms
 
-Sorting Algorithms Java Implementation
+Sorting Algorithms Java and C++ Implementation
 - Bubble Sort
 - Selection Sort
 - Counting Sort
