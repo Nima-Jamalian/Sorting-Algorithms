@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Collections;
 
 public class SortingAlgorithms{
     public static void main(String[] args) throws Exception{
@@ -12,28 +13,33 @@ public class SortingAlgorithms{
         System.out.println("Press 1 for Bubble Sort:");
         System.out.println("Press 2 for Selection Sort:");
         System.out.println("Press 3 for Counting Sort:");
+        System.out.println("Press 4 for Radix Sort:");
+        System.out.println("Press 5 for Bucket Sort:");
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
         // Input Empty
         // int[] input = {};
         // Input Positive Number
-        // int[] input = { 10, 6, 8, 5, 7, 3, 4 };
+        int[] input = { 10, 6, 8, 5, 7, 3, 4 };
         // Input with constant numbers
         // int[] input = { 2, 2, 2, 2, 2, 2, 2 };
         // Input with positive and negative numbers
-        int[] input = { 10, -6, -8, -5, -7, 3, 4 };
+        //int[] input = { 10, -6, -8, -5, -7, 3, 4 };
         switch (userInput) {
             case "1":
                 SelectSortingOption("Bubble", input);
-                StartSortingProgramme();
                 break;
                 case "2":
                 SelectSortingOption("Selection", input);
-                StartSortingProgramme();
                 break;
                 case "3":
                 SelectSortingOption("Counting", input);
-                StartSortingProgramme();
+                break;
+                case "4":
+                SelectSortingOption("Radix", input);
+                break;
+                case "5":
+                SelectSortingOption("Bucket", input);
                 break;
             default:
                  System.out.println("Wrong input, try again!");
@@ -56,10 +62,17 @@ public class SortingAlgorithms{
             case "Counting":
             System.out.println("Sorted Array: " + Arrays.toString(CountingSort(input)));
             break;
+            case "Radix":
+            System.out.println("Sorted Array: " + Arrays.toString(RadixSort(input)));
+            break;
+            case "Bucket":
+            System.out.println("Sorted Array: " + Arrays.toString(BucketSort(input)));
+            break;
             default:
             System.out.println("Sort Algorithm for " + SortName + " has not been defined.");
             break;
         }
+        StartSortingProgramme();
     }
 
     private static int[] BubbleSort(int[] array) {
@@ -133,5 +146,40 @@ public class SortingAlgorithms{
             return array;
         }
     }
+
+    private static int[] HybricSort(int[] array){//Combination of Bubble sort and Selection sort
+        return array;
+    }
+
+    private static int[] MountainSort(int[] array){//ModifiedCountingSort
+        return array;
+    }
+
+    private static int[] RadixSort(int[] array){
+        int max = Arrays.stream(array).max().getAsInt();
+        System.out.println(max);
+
+        for(int s = 1; max/s > 0; s *= 10){
+            int[] countingArray = {0,0,0,0,0,0,0,0,0,0};
+            for (int i = 0; i < array.length; i++)
+              countingArray[(array[i] / s) % 10]++;
+          
+            for (int i = 1; i < 10; i++)
+              countingArray[i] += countingArray[i - 1];
+          
+            int[] outputArray = {0,0,0,0,0,0,0,0};
+            for (int i = array.length - 1; i >= 0; i--)
+              outputArray[--countingArray[(array[i] / s) % 10]] = array[i];
+          
+            for (int i = 0; i < array.length; i++)
+              array[i] = outputArray[i];
+        }
+        System.out.println("Testing");
+        return array;
+    }
+
+    public static int[] BucketSort(int[] array){
+     return array;
+  }
 
 }
