@@ -26,7 +26,7 @@ vector<int> BubbleSort(vector<int> array)
                 array[i] = array[i + 1];
                 array[i + 1] = temp;
                 toSwap = true;
-                //PrintVectorElement(array);
+                // PrintVectorElement(array);
             }
         }
     }
@@ -37,7 +37,7 @@ vector<int> SelectionSort(vector<int> array)
 {
     for (int i = 0; i < array.size() - 1; i++)
     {
-        //PrintVectorElement(array);
+        // PrintVectorElement(array);
 
         int min_idx = i;
         for (int j = i + 1; j < array.size(); j++)
@@ -68,7 +68,7 @@ vector<int> CountingSort(vector<int> array)
     {
         count[array[i] - min]++;
     }
-    //PrintVectorElement(count);
+    // PrintVectorElement(count);
 
     int array_idx = 0;
     for (int i = 0; i < count.size(); i++)
@@ -128,7 +128,7 @@ void StartSortingProgrammer()
     cout << "Press 3 for Counting Sort:" << endl;
     cin >> userInput;
     bool isInputValid = false;
-    if (cin.good())//Validate to see user input is an integer
+    if (cin.good()) // Validate to see user input is an integer
     {
         isInputValid = true;
         switch (userInput)
@@ -153,11 +153,11 @@ void StartSortingProgrammer()
     }
     else
     {
-        //User Input is not an interger
-        //Something went wrong, we reset the buffer's state to good
+        // User Input is not an interger
+        // Something went wrong, we reset the buffer's state to good
         cin.clear();
-        //and empty it
-        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        // and empty it
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Wrong Input! Try again." << endl;
         StartSortingProgrammer();
     }
@@ -168,4 +168,3 @@ int main()
     StartSortingProgrammer();
     return 0;
 }
-
