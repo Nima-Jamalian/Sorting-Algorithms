@@ -13,12 +13,13 @@ void PrintVectorElement(vector<int> array)
 
 vector<int> BubbleSort(vector<int> array)
 {
+    int n = array.size() - 1;
     bool toSwap = true;
     int temp;
     while (toSwap)
     {
         toSwap = false;
-        for (int i = 0; i < array.size() - 1; i++)
+        for (int i = 0; i < n; i++)
         {
             if (array[i] > array[i + 1])
             {
@@ -29,6 +30,7 @@ vector<int> BubbleSort(vector<int> array)
                 // PrintVectorElement(array);
             }
         }
+        n--;
     }
     return array;
 }

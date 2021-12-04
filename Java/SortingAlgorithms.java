@@ -98,11 +98,12 @@ public class SortingAlgorithms {
   }
 
   private static int[] BubbleSort(int[] array) {
+    int n = array.length - 1;
     boolean toSwap = true;
     int temp;
     while (toSwap) {
       toSwap = false;
-      for (int i = 0; i < array.length - 1; i++) {
+      for (int i = 0; i < n; i++) {
         if (array[i] > array[i + 1]) {
           temp = array[i];
           array[i] = array[i + 1];
@@ -111,6 +112,7 @@ public class SortingAlgorithms {
           //System.out.println(Arrays.toString(array));
         }
       }
+      n--;
     }
     return array;
   }
