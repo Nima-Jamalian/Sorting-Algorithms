@@ -122,10 +122,12 @@ public class SortingAlgorithms {
 
       // Find the minimum element in unsorted array
       int min_idx = i;
-      for (int j = i + 1; j < array.length; j++) if (
-        array[j] < array[min_idx]
-      ) min_idx = j;
-
+      for (int j = i + 1; j < array.length; j++) {
+        if (array[j] < array[min_idx]) {
+          min_idx = j;
+        }
+      }
+      
       // Swap the found minimum element with the first
       // element
       int temp = array[min_idx];
@@ -171,7 +173,7 @@ public class SortingAlgorithms {
   }
 
   private static void Swap(int[] array, int i, int j) {
-    int temp = array[i];
+    int temp = array[j];
     array[j] = array[i];
     array[i] = temp;
   }
