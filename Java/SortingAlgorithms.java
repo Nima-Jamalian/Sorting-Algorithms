@@ -1,6 +1,9 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
+import java.util.LinkedList;
 
 public class SortingAlgorithms {
 
@@ -16,7 +19,7 @@ public class SortingAlgorithms {
     System.out.println("Press 3 for Counting Sort:");
     System.out.println("Press 4 for Radix Sort:");
     System.out.println("Press 5 for Bucket Sort:");
-    System.out.println("Press 6 for Hybrid (Bubble + Selection) Sort:");
+
     Scanner scanner = new Scanner(System.in);
     String userInput = scanner.nextLine();
     // Input Empty
@@ -129,7 +132,7 @@ public class SortingAlgorithms {
           min_idx = j;
         }
       }
-      
+
       // Swap the found minimum element with the first
       // element
       int temp = array[min_idx];
@@ -185,29 +188,62 @@ public class SortingAlgorithms {
   }
 
   private static int[] RadixSort(int[] array) {
-    // int max = Arrays.stream(array).max().getAsInt();
-    // System.out.println(max);
+    int max = Arrays.stream(array).max().getAsInt();
+    for (int s = 1; max / s > 0; s *= 10) {
+      int[] countingArray = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+      for (int i = 0; i < array.length; i++) countingArray[(array[i] / s) %
+        10]++;
 
-    // for(int s = 1; max/s > 0; s *= 10){
-    //     int[] countingArray = {0,0,0,0,0,0,0,0,0,0};
-    //     for (int i = 0; i < array.length; i++)
-    //       countingArray[(array[i] / s) % 10]++;
+      for (int i = 1; i < 10; i++) countingArray[i] += countingArray[i - 1];
 
-    //     for (int i = 1; i < 10; i++)
-    //       countingArray[i] += countingArray[i - 1];
+      int[] outputArray = { 0, 0, 0, 0, 0, 0, 0, 0 };
+      for (int i = array.length - 1; i >= 0; i--) outputArray[--countingArray[(
+            array[i] / s
+          ) %
+          10]] =
+        array[i];
 
-    //     int[] outputArray = {0,0,0,0,0,0,0,0};
-    //     for (int i = array.length - 1; i >= 0; i--)
-    //       outputArray[--countingArray[(array[i] / s) % 10]] = array[i];
-
-    //     for (int i = 0; i < array.length; i++)
-    //       array[i] = outputArray[i];
-    // }
-    // System.out.println("Testing");
+      for (int i = 0; i < array.length; i++) array[i] = outputArray[i];
+    }
     return array;
   }
 
   public static int[] BucketSort(int[] array) {
-    return array;
+    int n = array.length;
+    if (n <= 0) {
+      return new int[0];
+    } else {
+      int noOfBuckets = 10;
+      // Create bucket array
+      List<Integer>[] buckets = new List[noOfBuckets];
+      // Associate a list with each index 
+      // in the bucket array         
+      for(int i = 0; i < noOfBuckets; i++){
+        buckets[i] = new LinkedList<>();
+      }
+      // Assign numbers from array to the proper bucket
+      // by using hashing function
+      for(int num : array){
+        //System.out.println("hash- " + hash(num));
+        buckets[hash(num)].add(num);
+      }
+      // sort buckets
+      for(List<Integer> bucket : buckets){
+        Collections.sort(bucket);
+      }
+      int i = 0;
+      // Merge buckets to get sorted array
+      for(List<Integer> bucket : buckets){
+        for(int num : bucket){
+          array[i++] = num;
+        }
+      }
+      return array;
+    }
   }
+
+    // A very simple hash function
+    private static int hash(int num){
+      return num/10;
+    }
 }
