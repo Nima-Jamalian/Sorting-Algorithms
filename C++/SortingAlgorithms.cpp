@@ -85,6 +85,85 @@ vector<int> CountingSort(vector<int> array)
     return array;
 }
 
+vector<int> RadixSort(vector<int> array)
+{
+    // Get maximum element
+    int max = *max_element(array.begin(), array.end());
+    int size = array.size();
+    // Apply counting sort to sort elements based on place value.
+    for (int place = 1; max / place > 0; place *= 10)
+    {
+        //Counting Sort
+        vector<int> output(size + 1);
+        max = array[0];
+        for (int i = 1; i < size; i++)
+        {
+            if (array[i] > max)
+                max = array[i];
+        }
+        vector<int> count(max + 1);
+
+        for (int i = 0; i < max; ++i)
+            count[i] = 0;
+
+        // Calculate count of elements
+        for (int i = 0; i < size; i++)
+            count[(array[i] / place) % 10]++;
+
+        // Calculate cumulative count
+        for (int i = 1; i < 10; i++)
+            count[i] += count[i - 1];
+
+        // Place the elements in sorted order
+        for (int i = size - 1; i >= 0; i--)
+        {
+            output[count[(array[i] / place) % 10] - 1] = array[i];
+            count[(array[i] / place) % 10]--;
+        }
+
+        for (int i = 0; i < size; i++)
+            array[i] = output[i];
+    }
+    return array;
+}
+
+vector<int> BucketSort(vector<int> array)
+{
+    int n = array.size();
+    int max = *max_element(array.begin(), array.end());
+    int min = *min_element(array.begin(), array.end());
+	int bucketLength = max - min + 1;
+
+    //In C++ "new" means dynamic memory allocation which means it returns a pointer
+	vector<int> * bucket = new vector<int>[bucketLength];
+
+	for (int i = 0; i < bucketLength; i++)
+	{
+		bucket[i] = vector<int>();
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		bucket[array[i] - min].push_back(array[i]);
+	}
+
+	int k = 0;
+	for (int i = 0; i < bucketLength; i++)
+	{
+		int bucketSize = bucket[i].size();
+
+		if (bucketSize > 0)
+		{
+			for (int j = 0; j < bucketSize; j++)
+			{
+				array[k] = bucket[i][j];
+				k++;
+			}
+		}
+	}
+    return array;
+}
+
 void SelectSortingOption(string SortName, vector<int> input)
 {
     cout << " " << endl;
@@ -104,6 +183,14 @@ void SelectSortingOption(string SortName, vector<int> input)
     else if (SortName == "Counting")
     {
         PrintVectorElement(CountingSort(input));
+    }
+    else if (SortName == "Radix")
+    {
+        PrintVectorElement(CountingSort(input));
+    }
+    else if (SortName == "Bucket")
+    {
+        PrintVectorElement(BucketSort(input));
     }
     else
     {
@@ -128,6 +215,8 @@ void StartSortingProgrammer()
     cout << "Press 1 for Bubble Sort: " << endl;
     cout << "Press 2 for Selection Sort:" << endl;
     cout << "Press 3 for Counting Sort:" << endl;
+    cout << "Press 4 for Radix Sort:" << endl;
+    cout << "Press 5 for Bucket Sort:" << endl;
     cin >> userInput;
     bool isInputValid = false;
     if (cin.good()) // Validate to see user input is an integer
@@ -145,6 +234,14 @@ void StartSortingProgrammer()
             break;
         case 3:
             SelectSortingOption("Counting", input);
+            StartSortingProgrammer();
+            break;
+        case 4:
+            SelectSortingOption("Radix", input);
+            StartSortingProgrammer();
+            break;
+        case 5:
+            SelectSortingOption("Bucket", input);
             StartSortingProgrammer();
             break;
         default:

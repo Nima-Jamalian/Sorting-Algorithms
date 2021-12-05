@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.LinkedList;
 
 public class SortingAlgorithms {
 
@@ -187,23 +187,59 @@ public class SortingAlgorithms {
     return array;
   }
 
-  private static int[] RadixSort(int[] array) {
+  private static int[] RadixSort1(int[] array) {
+    // Get the maximum element
     int max = Arrays.stream(array).max().getAsInt();
-    for (int s = 1; max / s > 0; s *= 10) {
+
+    //Apply counting sort to sort the elements based on place value.
+    for (int place = 1; max / place > 0; place *= 10) {
       int[] countingArray = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-      for (int i = 0; i < array.length; i++) countingArray[(array[i] / s) %
+      for (int i = 0; i < array.length; i++) countingArray[(array[i] / place) %
         10]++;
 
       for (int i = 1; i < 10; i++) countingArray[i] += countingArray[i - 1];
 
       int[] outputArray = { 0, 0, 0, 0, 0, 0, 0, 0 };
       for (int i = array.length - 1; i >= 0; i--) outputArray[--countingArray[(
-            array[i] / s
+            array[i] / place
           ) %
           10]] =
         array[i];
 
       for (int i = 0; i < array.length; i++) array[i] = outputArray[i];
+    }
+    return array;
+  }
+
+  private static int[] RadixSort(int[] array) {
+    // Get maximum element
+    int max = Arrays.stream(array).max().getAsInt();
+    int size = array.length;
+    // Apply counting sort to sort elements based on place value.
+    for (int place = 1; max / place > 0; place *= 10) {
+      //Counting Sort
+      int[] output = new int[size + 1];
+      max = array[0];
+      for (int i = 1; i < size; i++) {
+        if (array[i] > max) max = array[i];
+      }
+      int[] count = new int[max + 1];
+
+      for (int i = 0; i < max; ++i) count[i] = 0;
+
+      // Calculate count of elements
+      for (int i = 0; i < size; i++) count[(array[i] / place) % 10]++;
+
+      // Calculate cumulative count
+      for (int i = 1; i < 10; i++) count[i] += count[i - 1];
+
+      // Place the elements in sorted order
+      for (int i = size - 1; i >= 0; i--) {
+        output[count[(array[i] / place) % 10] - 1] = array[i];
+        count[(array[i] / place) % 10]--;
+      }
+
+      for (int i = 0; i < size; i++) array[i] = output[i];
     }
     return array;
   }
@@ -216,25 +252,25 @@ public class SortingAlgorithms {
       int noOfBuckets = 10;
       // Create bucket array
       List<Integer>[] buckets = new List[noOfBuckets];
-      // Associate a list with each index 
-      // in the bucket array         
-      for(int i = 0; i < noOfBuckets; i++){
+      // Associate a list with each index
+      // in the bucket array
+      for (int i = 0; i < noOfBuckets; i++) {
         buckets[i] = new LinkedList<>();
       }
       // Assign numbers from array to the proper bucket
       // by using hashing function
-      for(int num : array){
+      for (int num : array) {
         //System.out.println("hash- " + hash(num));
         buckets[hash(num)].add(num);
       }
       // sort buckets
-      for(List<Integer> bucket : buckets){
+      for (List<Integer> bucket : buckets) {
         Collections.sort(bucket);
       }
       int i = 0;
       // Merge buckets to get sorted array
-      for(List<Integer> bucket : buckets){
-        for(int num : bucket){
+      for (List<Integer> bucket : buckets) {
+        for (int num : bucket) {
           array[i++] = num;
         }
       }
@@ -242,8 +278,8 @@ public class SortingAlgorithms {
     }
   }
 
-    // A very simple hash function
-    private static int hash(int num){
-      return num/10;
-    }
+  // A very simple hash function
+  private static int hash(int num) {
+    return num / 10;
+  }
 }
