@@ -189,30 +189,6 @@ public class SortingAlgorithms {
     return array;
   }
 
-  private static int[] RadixSort1(int[] array) {
-    // Get the maximum element
-    int max = Arrays.stream(array).max().getAsInt();
-
-    //Apply counting sort to sort the elements based on place value.
-    for (int place = 1; max / place > 0; place *= 10) {
-      int[] countingArray = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-      for (int i = 0; i < array.length; i++) countingArray[(array[i] / place) %
-        10]++;
-
-      for (int i = 1; i < 10; i++) countingArray[i] += countingArray[i - 1];
-
-      int[] outputArray = { 0, 0, 0, 0, 0, 0, 0, 0 };
-      for (int i = array.length - 1; i >= 0; i--) outputArray[--countingArray[(
-            array[i] / place
-          ) %
-          10]] =
-        array[i];
-
-      for (int i = 0; i < array.length; i++) array[i] = outputArray[i];
-    }
-    return array;
-  }
-
   private static int[] RadixSort(int[] array) {
     // Get maximum element
     int max = Arrays.stream(array).max().getAsInt();
