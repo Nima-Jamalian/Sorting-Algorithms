@@ -221,10 +221,6 @@ public class SortingAlgorithms {
     for (int place = 1; max / place > 0; place *= 10) {
       //Counting Sort
       int[] output = new int[size + 1];
-      max = array[0];
-      for (int i = 1; i < size; i++) {
-        if (array[i] > max) max = array[i];
-      }
       int[] count = new int[max + 1];
 
       for (int i = 0; i < max; ++i) count[i] = 0;

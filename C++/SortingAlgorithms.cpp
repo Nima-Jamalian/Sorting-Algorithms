@@ -96,13 +96,6 @@ vector<int> RadixSort(vector<int> array)
     for (int place = 1; max / place > 0; place *= 10)
     {
         //Counting Sort
-        vector<int> output(size + 1);
-        max = array[0];
-        for (int i = 1; i < size; i++)
-        {
-            if (array[i] > max)
-                max = array[i];
-        }
         vector<int> count(max + 1);
 
         for (int i = 0; i < max; ++i)
@@ -137,7 +130,7 @@ vector<int> BucketSort(vector<int> array)
 	int bucketLength = max - min + 1;
 
     //In C++ "new" means dynamic memory allocation which means it returns a pointer
-	vector<int> * bucket = new vector<int>[bucketLength];
+	 vector<int> * bucket = new vector<int>[bucketLength];
 
 	for (int i = 0; i < bucketLength; i++)
 	{
