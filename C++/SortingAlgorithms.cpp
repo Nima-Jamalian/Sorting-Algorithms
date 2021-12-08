@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <memory>
 using namespace std;
 
 void PrintVectorElement(vector<int> array)
@@ -97,6 +98,7 @@ vector<int> RadixSort(vector<int> array)
     {
         //Counting Sort
         vector<int> count(max + 1);
+        vector<int> output(size + 1);
 
         for (int i = 0; i < max; ++i)
             count[i] = 0;
@@ -122,6 +124,7 @@ vector<int> RadixSort(vector<int> array)
     return array;
 }
 
+
 vector<int> BucketSort(vector<int> array)
 {
     int n = array.size();
@@ -130,7 +133,7 @@ vector<int> BucketSort(vector<int> array)
 	int bucketLength = max - min + 1;
 
     //In C++ "new" means dynamic memory allocation which means it returns a pointer
-	 vector<int> * bucket = new vector<int>[bucketLength];
+    vector<int> * bucket = new vector<int>[bucketLength];
 
 	for (int i = 0; i < bucketLength; i++)
 	{
@@ -156,6 +159,8 @@ vector<int> BucketSort(vector<int> array)
 			}
 		}
 	}
+
+    delete[] bucket;
     return array;
 }
 
