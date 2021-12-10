@@ -199,8 +199,6 @@ public class SortingAlgorithms {
       int[] output = new int[size + 1];
       int[] count = new int[max + 1];
 
-      for (int i = 0; i < max; ++i) count[i] = 0;
-
       // Calculate count of elements
       for (int i = 0; i < size; i++) count[(array[i] / place) % 10]++;
 

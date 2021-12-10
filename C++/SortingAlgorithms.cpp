@@ -100,9 +100,6 @@ vector<int> RadixSort(vector<int> array)
         vector<int> count(max + 1);
         vector<int> output(size + 1);
 
-        for (int i = 0; i < max; ++i)
-            count[i] = 0;
-
         // Calculate count of elements
         for (int i = 0; i < size; i++)
             count[(array[i] / place) % 10]++;
