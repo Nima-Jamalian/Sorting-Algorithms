@@ -159,7 +159,6 @@ vector<int> BucketSort(vector<int> array)
 			}
 		}
 	}
-
     delete[] bucket;
     return array;
 }
